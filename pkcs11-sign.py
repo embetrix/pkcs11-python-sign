@@ -5,6 +5,9 @@
 # pkcs11-tool --keypairgen --key-type EC:prime256v1 --label "testkeyEC3333" --id 3333  --login --usage-sign
 #
 
+import os
+import pkcs11
+
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import ECC
 from Crypto.Signature import DSS
@@ -12,10 +15,8 @@ from Crypto.Signature import DSS
 from pkcs11 import KeyType, ObjectClass, Mechanism
 from pkcs11.util.ec import encode_ec_public_key
 
-import os
-import pkcs11
 
-message = b'I give my permission to order #4355'
+message = b'A message to sign !'
 
 lib = pkcs11.lib(os.environ['PKCS11_MODULE'])
 token = lib.get_token(token_label='SmartCard-HSM (UserPIN)')
